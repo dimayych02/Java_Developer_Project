@@ -13,9 +13,9 @@ import java.util.Set;
 
 public class UIHelper extends UiTests {
     public static void scrollToElement(WebElement element) {
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
+        ((JavascriptExecutor) driver)
+                .executeScript("arguments[0].scrollIntoView();", element);
     }
-
 
 
     public static boolean checkElementVisible(WebElement element) {
