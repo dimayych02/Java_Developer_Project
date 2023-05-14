@@ -8,16 +8,13 @@ import helpers.AttachOnFailedTest;
 import helpers.TestNGRetry;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
-import pages.BookStorePage;
-import pages.ElementsPage;
+import pages.*;
 import dataGenerator.Generator;
-import pages.FormsPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.MainPage;
 
 @Listeners(AttachOnFailedTest.class)
 public class UiTests {
@@ -26,6 +23,7 @@ public class UiTests {
     private ElementsPage elementsPage;
     private FormsPage formsPage;
     private BookStorePage bookStorePage;
+    private AlertPage alertPage;
     private String userName;
     private String password;
     private final String URL = ApiData.Endpoints.BASE_URL;
@@ -43,6 +41,7 @@ public class UiTests {
         elementsPage = new ElementsPage(driver);
         formsPage = new FormsPage(driver);
         bookStorePage = new BookStorePage(driver);
+        alertPage= new AlertPage(driver);
         driver.get(URL);
     }
 
@@ -151,7 +150,7 @@ public class UiTests {
         Assert.assertEquals(bookStorePage.getBooksTitleUI(), BookAttributes.getBooksTitleApi());
     }
 
-    @Test
+    @Test(retryAnalyzer = TestNGRetry.class)
     public void uiAuthorizationWithApiRegister() { //создание пользователя на бэке и авторизация на UI
         //Создание нового польхователя на бэке
         userName = Generator.generateString();
@@ -178,6 +177,13 @@ public class UiTests {
         bookStorePage.captchaClick();
         bookStorePage.registerClick();
         Assert.assertEquals(RequestToApi.fillJsonBody(USER_DATA_AUTH, AUTHORIZATION_ENDPOINT), 201);
+    }
+
+    @Test
+    public void newTabAlert(){
+        mainPage.clickToAlerts();
+        alertPage.browserWindowsClick();
+        alertPage.newTabClick();
     }
 
     @AfterMethod

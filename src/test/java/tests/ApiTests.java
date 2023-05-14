@@ -3,6 +3,7 @@ package tests;
 import api.ApiData;
 import api.BookStoreModel;
 import api.RequestToApi;
+import helpers.TestNGRetry;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -38,7 +39,7 @@ public class ApiTests {
                 .getMessage(), USER_EXIST_MESSAGE);
     }
 
-    @Test
+    @Test(retryAnalyzer = TestNGRetry.class,priority = -1)
     public void successUserRegister() {
         Assert.assertTrue(RequestToApi.extractResponse(RequestToApi.fillJsonBody(userDataRegister, NEW_USER_ENDPOINT))
                 .getUserID() != null);
@@ -52,7 +53,7 @@ public class ApiTests {
 
     @Test
     public void deleteUser() {
-        String userID = RequestToApi.extractResponse(RequestToApi.fillJsonBody(userDataRegister, NEW_USER_ENDPOINT)).getUserID();
+        String userID = (String) RequestToApi.extractResponse(RequestToApi.fillJsonBody(userDataRegister, NEW_USER_ENDPOINT)).getUserID();
         Assert.assertEquals(RequestToApi.deleteUser(UUID_PARAM, userID, DELETE_USER_ENDPOINT).statusCode(), 200);
     }
 

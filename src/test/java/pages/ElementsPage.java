@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 
 
 public class ElementsPage  {
-
     private String generatedFirstName;
     private final String URL = ApiData.Endpoints.BASE_URL;
     private WebDriver driver;
@@ -49,7 +48,7 @@ public class ElementsPage  {
     private WebElement submitButton;
     @FindBy(xpath = "//div//p")
     private WebElement checkFillForm;
-    @FindBy(css = "svg[class=rct-icon rct-icon-uncheck]")
+    @FindBy(css = "svg[class=\"rct-icon rct-icon-uncheck\"]")
     private WebElement pathCheckmark;
     @FindBy(xpath = "//span[text()='You have selected :']")
     private WebElement checkSelectedFolders;
@@ -283,7 +282,7 @@ public class ElementsPage  {
         return this;
     }
 
-    private List<String> getUsers(List<WebElement> usersElement) {
+    private List<String> getUsers(List<WebElement> usersElement) throws NullPointerException{
         return usersElement.stream()
                 .map(x -> x.getText())
                 .collect(Collectors.toList());

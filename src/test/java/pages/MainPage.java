@@ -39,6 +39,7 @@ public class MainPage extends UIHelper {
     }
 
     public MainPage clickToAlerts(){
+        scrollToElement(buttonAlerts);
         buttonAlerts.click();
         return this;
     }

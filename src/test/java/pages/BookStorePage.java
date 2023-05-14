@@ -11,13 +11,13 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class BookStorePage  {
+public class BookStorePage {
     private WebDriver driver;
-    private final String ALERT_MESSAGE="User Register Successfully.";
+    private final String ALERT_MESSAGE = "User Register Successfully.";
 
-    @FindBy(xpath="//span[text()='Login']")
+    @FindBy(xpath = "//span[text()='Login']")
     private WebElement spanLogin;
-    @FindBy(id="newUser")
+    @FindBy(id = "newUser")
     private WebElement newUserButton;
     @FindBy(xpath = "//div[@class=\"rt-td\"]//a[@href]")
     private List<WebElement> listOfBooksTitle;
@@ -25,9 +25,9 @@ public class BookStorePage  {
     private List<WebElement> listOfBooksAuthor;
     @FindBy(xpath = "//div[@class=\"rt-td\"][4]")
     private List<WebElement> listOFBooksPublisher;
-    @FindBy(id="firstname")
+    @FindBy(id = "firstname")
     private WebElement firstNameInput;
-    @FindBy(id="lastname")
+    @FindBy(id = "lastname")
     private WebElement lastNameInput;
     @FindBy(id = "userName")
     private WebElement userNameInput;
@@ -35,14 +35,15 @@ public class BookStorePage  {
     private WebElement passwordInput;
     @FindBy(xpath = "//button[text()='Login']")
     private WebElement loginButton;
-    @FindBy(xpath="//*[contains(text(),'User Name')]")
+    @FindBy(xpath = "//*[contains(text(),'User Name')]")
     private WebElement labelUserName;
-    @FindBy(xpath="//button[text()='Register']")
+    @FindBy(xpath = "//button[text()='Register']")
     private WebElement registerButton;
-    @FindBy(css="iframe[title=reCAPTCHA]")
+    @FindBy(css = "iframe[title=reCAPTCHA]")
     private WebElement iframeCaptcha;
-    @FindBy(css="div[class=recaptcha-checkbox-border]")
+    @FindBy(css = "div[class=recaptcha-checkbox-border]")
     private WebElement captchaButton;
+
     public BookStorePage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
@@ -57,24 +58,27 @@ public class BookStorePage  {
 
     @Step("Прокрутка вниз для каждого названия книги")
     public BookStorePage scrollToAllBooksTitle() {
-        UIHelper.scrollToElementCollection(listOfBooksTitle);
+        listOfBooksTitle = UIHelper.waitForElementsVisible(listOfBooksTitle, 5);
+        UIHelper.scrollToElement(listOfBooksTitle.get(listOfBooksTitle.size() - 1));
         return this;
     }
 
     @Step("Прокрутка вниз для каждого названия книги")
     public BookStorePage scrollToAllBooksAuthor() {
-        UIHelper.scrollToElementCollection(listOfBooksAuthor);
+        listOfBooksAuthor = UIHelper.waitForElementsVisible(listOfBooksAuthor, 5);
+        UIHelper.scrollToElement(listOfBooksAuthor.get(listOfBooksAuthor.size() - 1));
         return this;
     }
 
     @Step("Прокрутка вниз для каждого названия книги")
     public BookStorePage scrollToAllBooksPublisher() {
-        UIHelper.scrollToElementCollection(listOfBooksAuthor);
+        listOFBooksPublisher = UIHelper.waitForElementsVisible(listOFBooksPublisher, 5);
+        UIHelper.scrollToElement(listOFBooksPublisher.get(listOFBooksPublisher.size() - 1));
         return this;
     }
 
     @Step("Клик по кнопке newUser")
-    public BookStorePage newUserButtonClick(){
+    public BookStorePage newUserButtonClick() {
         newUserButton.click();
         return this;
     }
@@ -104,18 +108,18 @@ public class BookStorePage  {
     }
 
     @Step("Клик по капче")
-    public BookStorePage captchaClick(){
+    public BookStorePage captchaClick() {
         UIHelper.frameElement(iframeCaptcha);
-        captchaButton=UIHelper.waitForElementVisible(captchaButton,5);
+        captchaButton = UIHelper.waitForElementVisible(captchaButton, 5);
         captchaButton.click();
         return this;
     }
 
     @Step("Клик по кнопке Register")
-    public BookStorePage registerClick(){
+    public BookStorePage registerClick() {
         registerButton.click();
         Assert.assertTrue(UIHelper.isAlertPresent());
-        Assert.assertEquals(UIHelper.getAlertText(),ALERT_MESSAGE);
+        Assert.assertEquals(UIHelper.getAlertText(), ALERT_MESSAGE);
         UIHelper.closeAlert();
         return this;
     }
@@ -123,7 +127,7 @@ public class BookStorePage  {
     @Step("Клик по кнопке Login")
     public BookStorePage loginClick() {
         loginButton.click();
-        labelUserName=UIHelper.waitForElementVisible(labelUserName,6);
+        labelUserName = UIHelper.waitForElementVisible(labelUserName, 5);
         Assert.assertTrue(UIHelper.checkElementVisible(labelUserName));
         //Проверка успешной авторизации путем видимости label-элемента userName
         return this;

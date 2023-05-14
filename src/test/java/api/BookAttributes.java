@@ -11,6 +11,7 @@ public class BookAttributes {
                 .collect(Collectors.toList());
     }
 
+
     public static List<String> getBooksAuthorApi() {
         return RequestToApi.getBooks(ApiData.Endpoints.GET_BOOKS_ENDPOINT)
                 .stream()
@@ -24,4 +25,5 @@ public class BookAttributes {
                 .map(x -> x.getPublisher().toString())
                 .collect(Collectors.toList());
     }
+
 }

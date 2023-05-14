@@ -16,13 +16,7 @@ public class UIHelper extends UiTests {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
     }
 
-    public static void scrollToElementCollection(List<WebElement> elements) {
-        for (WebElement element : elements) {
-            if (element.isDisplayed() != true) {
-                scrollToElement(element);
-            }
-        }
-    }
+
 
     public static boolean checkElementVisible(WebElement element) {
         if (element.isDisplayed()) {
@@ -42,6 +36,11 @@ public class UIHelper extends UiTests {
 
     public static WebElement waitForElementVisible(WebElement findStrategy, long timeoutInSeconds) {
         getWaiter(timeoutInSeconds).until(ExpectedConditions.visibilityOf(findStrategy));
+        return findStrategy;
+    }
+
+    public static List<WebElement> waitForElementsVisible(List<WebElement> findStrategy, long timeoutInSeconds) {
+        getWaiter(timeoutInSeconds).until(ExpectedConditions.visibilityOfAllElements(findStrategy));
         return findStrategy;
     }
 

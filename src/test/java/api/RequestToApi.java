@@ -23,8 +23,7 @@ public class RequestToApi {
         return new RestAssuredHelper(GET)
                 .setSpecification()
                 .makeRequest(basePath)
-                .as(BookStoreModel.class)
-                .getBooks();
+                .as(BookStoreModel.class).getBooks();
     }
 
     @Step("Заполнение  JSON-параметрами body")
