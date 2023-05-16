@@ -15,6 +15,7 @@ public class AlertPage {
     private final String SECOND_ALERT_TEXT="This alert appeared after 5 seconds";
     private final String THIRD_ALERT_TEXT="Do you confirm action?";
     private final String TEXT_AFTER_ALERT_CLICK="Ok";
+
     @FindBy(xpath="//span[text()='Browser Windows']")
     private WebElement browserWindows;
 

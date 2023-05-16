@@ -11,6 +11,7 @@ import helpers.UIHelper;
 
 public class FormsPage extends UIHelper {
     private WebDriver driver;
+
     @FindBy(xpath = "//li//*[text()='Practice Form']")
     private WebElement practiseForm;
 
