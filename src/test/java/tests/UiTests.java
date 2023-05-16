@@ -18,6 +18,7 @@ import org.testng.annotations.Test;
 
 @Listeners(AttachOnFailedTest.class)
 public class UiTests {
+    
     public static WebDriver driver;
     private MainPage mainPage;
     private ElementsPage elementsPage;
