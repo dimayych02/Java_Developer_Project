@@ -20,72 +20,105 @@ public class ElementsPage {
     private WebDriver driver;
     @FindBy(xpath = "//li//*[text()='Text Box']")
     private WebElement textBox;
+
     @FindBy(xpath = "//li//*[text()='Check Box']")
     private WebElement checkBox;
+
     @FindBy(xpath = "//li//*[text()='Radio Button']")
     private WebElement radioButton;
+
     @FindBy(xpath = "//li//*[text()='Web Tables']")
     private WebElement webTables;
+
     @FindBy(xpath = "//li//*[text()='Buttons']")
     private WebElement buttons;
+
     @FindBy(xpath = "//li//*[text()='Links']")
     private WebElement links;
+
     @FindBy(xpath = "//li//*[text()='Broken Links']")
     private WebElement brokenLinks;
+
     @FindBy(xpath = "//li//*[text()='Upload and Download']")
     private WebElement uploadAndDownload;
+
     @FindBy(xpath = "//li//*[text()='Dynamic Properties']")
     private WebElement dynamicProperties;
+
     @FindBy(id = "userName")
     private WebElement fieldFullName;
+
     @FindBy(id = "userEmail")
     private WebElement emailElement;
+
     @FindBy(id = "currentAddress")
     private WebElement fieldCurrentAddress;
+
     @FindBy(id = "permanentAddress")
     private WebElement fieldPermanentAddress;
+
     @FindBy(id = "submit")
     private WebElement submitButton;
+
     @FindBy(xpath = "//div//p")
     private WebElement checkFillForm;
+
     @FindBy(css = "svg[class=\"rct-icon rct-icon-uncheck\"]")
     private WebElement pathCheckmark;
+
     @FindBy(xpath = "//span[text()='You have selected :']")
     private WebElement checkSelectedFolders;
+
     @FindBy(xpath = "//*[contains(text(),'Impressive')]")
     private WebElement radioButtonElement;
+
     @FindBy(xpath = "//p[@class=\"mt-3\"]")
     private WebElement checkSelectedRadioButton;
+
     @FindBy(xpath = "//button[text()='Add']")
     private WebElement registrationForm;
+
     @FindBy(xpath = "//div[@class=\"rt-td\"][1]")
     private List<WebElement> usersByFirstName;
+
     @FindBy(id = "firstName")
     private WebElement firstNameElement;
+
     @FindBy(id = "lastName")
     private WebElement lastNameElement;
+
     @FindBy(id = "age")
     private WebElement ageElement;
+
     @FindBy(id = "salary")
     private WebElement salaryElement;
+
     @FindBy(id = "department")
     private WebElement departmentElement;
+
     @FindBy(css = "span[title='Delete']")
     private List<WebElement> buttonDeleteUsers;
     @FindBy(xpath = "//button[text()='Click Me']")
     private WebElement clickMeButton;
+
     @FindBy(id = "dynamicClickMessage")
     private WebElement messageAfterClick;
+
     @FindBy(id = "simpleLink")
     private WebElement homeLink;
+
     @FindBy(xpath = "//a[text()='Click Here for Valid Link']")
     private WebElement validLink;
+
     @FindBy(id = "downloadButton")
     private WebElement downloadButton;
+
     @FindBy(id = "colorChange")
     private WebElement colorChange;
+
     @FindBy(id = "visibleAfter")
     private WebElement visibleAfterSeconds;
+
 
     public ElementsPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
@@ -174,7 +207,7 @@ public class ElementsPage {
     public ElementsPage clickSubmitButton() {
         UIHelper.scrollToElement(submitButton);
         submitButton.click();
-        Assert.assertTrue(UIHelper.checkElementVisible(checkFillForm),"Элемент не виден в DOM-дереве!");
+        Assert.assertTrue(UIHelper.checkElementVisible(checkFillForm), "Элемент не виден в DOM-дереве!");
         return this;
     }
 
@@ -258,21 +291,21 @@ public class ElementsPage {
     @Step("Клик по  homeLink")
     public ElementsPage homeLinkClick() {
         homeLink.click();
-        Assert.assertEquals(UIHelper.redirectUrl(), URL,"Redirect URLs не совпадают!");
+        Assert.assertEquals(UIHelper.redirectUrl(), URL, "Redirect URLs не совпадают!");
         return this;
     }
 
     @Step("Клик по  validLink")
     public ElementsPage validLinkClick() {
         validLink.click();
-        Assert.assertEquals(UIHelper.redirectUrl(), URL,"Redirect URLs не совпадают!");
+        Assert.assertEquals(UIHelper.redirectUrl(), URL, "Redirect URLs не совпадают!");
         return this;
     }
 
     @Step("Клик по кнопке download")
     public ElementsPage downloadClick() throws InterruptedException {
         downloadButton.click();
-        Assert.assertTrue(DownloadFile.checkDownloadedFile(),"Файл не был скачен!");
+        Assert.assertTrue(DownloadFile.checkDownloadedFile(), "Файл не был скачен!");
         return this;
     }
 

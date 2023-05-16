@@ -17,32 +17,46 @@ public class BookStorePage {
 
     @FindBy(xpath = "//span[text()='Login']")
     private WebElement spanLogin;
+
     @FindBy(id = "newUser")
     private WebElement newUserButton;
+
     @FindBy(xpath = "//div[@class=\"rt-td\"]//a[@href]")
     private List<WebElement> listOfBooksTitle;
+
     @FindBy(xpath = "//div[@class=\"rt-td\"][3]")
     private List<WebElement> listOfBooksAuthor;
+
     @FindBy(xpath = "//div[@class=\"rt-td\"][4]")
     private List<WebElement> listOFBooksPublisher;
+
     @FindBy(id = "firstname")
     private WebElement firstNameInput;
+
     @FindBy(id = "lastname")
     private WebElement lastNameInput;
+
     @FindBy(id = "userName")
     private WebElement userNameInput;
+
     @FindBy(id = "password")
     private WebElement passwordInput;
+
     @FindBy(xpath = "//button[text()='Login']")
     private WebElement loginButton;
+
     @FindBy(xpath = "//*[contains(text(),'User Name')]")
     private WebElement labelUserName;
+
     @FindBy(xpath = "//button[text()='Register']")
     private WebElement registerButton;
+
     @FindBy(css = "iframe[title=reCAPTCHA]")
     private WebElement iframeCaptcha;
+
     @FindBy(css = "div[class=recaptcha-checkbox-border]")
     private WebElement captchaButton;
+
 
     public BookStorePage(WebDriver driver) {
         PageFactory.initElements(driver, this);

@@ -17,26 +17,37 @@ public class AlertPage {
     private final String TEXT_AFTER_ALERT_CLICK="Ok";
     @FindBy(xpath="//span[text()='Browser Windows']")
     private WebElement browserWindows;
+
     @FindBy(xpath="//span[text()='Alerts']")
     private WebElement alerts;
+
     @FindBy(xpath="//span[text()='Frames']")
     private WebElement frames;
+
     @FindBy(xpath="//span[text()='Nested Frames']")
     private WebElement nestedFrames;
+
     @FindBy(xpath="//span[text()='Modal Dialogs']")
     private WebElement modalDialogs;
+
     @FindBy(xpath="//*[text()='New Tab']")
     private WebElement newTabButton;
+
     @FindBy(xpath="//*[text()='This is a sample page']")
     private WebElement redirectPageText;
+
     @FindBy(id="alertButton")
     private WebElement clickButtonToSeeAlert;
+
     @FindBy(id="timerAlertButton")
     private WebElement timeAlert;
+
     @FindBy(id="confirmButton")
     private WebElement confirmAlert;
+
     @FindBy(id="confirmResult")
     private WebElement confirmAlertResult;
+
 
     public AlertPage(WebDriver driver) {
         PageFactory.initElements(driver, this);

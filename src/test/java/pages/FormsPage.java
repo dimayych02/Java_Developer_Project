@@ -13,46 +13,67 @@ public class FormsPage extends UIHelper {
     private WebDriver driver;
     @FindBy(xpath = "//li//*[text()='Practice Form']")
     private WebElement practiseForm;
+
     @FindBy(id = "firstName")
     private WebElement firstName;
+
     @FindBy(id = "lastName")
     private WebElement lastName;
+
     @FindBy(id = "userEmail")
     private WebElement userEmail;
+
     @FindBy(css = "label[for=gender-radio-1]")
     private WebElement maleGender;
-    @FindBy(css= "label[for=gender-radio-2]")
+
+    @FindBy(css = "label[for=gender-radio-2]")
     private WebElement femaleGender;
+
     @FindBy(css = "label[for=gender-radio-3]")
     private WebElement otherGender;
+
     @FindBy(id = "userNumber")
     private WebElement userNumber;
+
     @FindBy(css = "input[id=dateOfBirthInput]")
     private WebElement dateOFBirth;
+
     @FindBy(id = "subjectsInput")
     private WebElement subjects;
+
     @FindBy(css = "label[for=hobbies-checkbox-1]")
     private WebElement hobbySports;
+
     @FindBy(css = "label[for=hobbies-checkbox-2]")
     private WebElement hobbyReading;
+
     @FindBy(css = "label[for=hobbies-checkbox-3]")
     private WebElement hobbyMusic;
+
     @FindBy(id = "currentAddress")
     private WebElement currentAddress;
-    @FindBy(css="select[class=react-datepicker__month-select]")
+
+    @FindBy(css = "select[class=react-datepicker__month-select]")
     private WebElement selectMonthButton;
-    @FindBy(xpath="//*[contains(text(),'October')]")
+
+    @FindBy(xpath = "//*[contains(text(),'October')]")
     private WebElement monthSelect;
-    @FindBy(css="select[class=react-datepicker__year-select]")
+
+    @FindBy(css = "select[class=react-datepicker__year-select]")
     private WebElement selectYearButton;
+
     @FindBy(xpath = "//*[text()='2002']")
     private WebElement yearSelect;
+
     @FindBy(xpath = "//*[text()='Select State']")
     private WebElement stateSelect;
+
     @FindBy(xpath = "//*[text()='Select City']")
     private WebElement citySelect;
+
     @FindBy(css = "div[class=\"react-datepicker__day react-datepicker__day--030\"]")
     private WebElement day;
+
 
     public FormsPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
@@ -115,14 +136,14 @@ public class FormsPage extends UIHelper {
         selectYearButton.click();
         yearSelect.click();
         day.click();
-        Assert.assertTrue(getAttributeValue(dateOFBirth,"value")
-                .equals("30 Oct 2002"),"Выбранный атрибут не совпадает с ожидаемым аттрибутом!");
+        Assert.assertTrue(getAttributeValue(dateOFBirth, "value")
+                .equals("30 Oct 2002"), "Выбранный атрибут не совпадает с ожидаемым аттрибутом!");
         return this;
     }
 
 
     @Step("Заполнение поля subjects")
-    public  FormsPage fillSubjects(String param){
+    public FormsPage fillSubjects(String param) {
         subjects.sendKeys(param);
         return this;
     }
@@ -146,10 +167,9 @@ public class FormsPage extends UIHelper {
     }
 
     @Step("Заполнение поля currentAddress")
-    public FormsPage fillCurrentAddress(String param){
+    public FormsPage fillCurrentAddress(String param) {
         currentAddress.sendKeys(param);
         return this;
     }
-
 
 }
