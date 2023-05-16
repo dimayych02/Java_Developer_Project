@@ -120,7 +120,7 @@ public class BookStorePage {
         registerButton.click();
         Assert.assertTrue(UIHelper.isAlertPresent());
         Assert.assertEquals(UIHelper.getAlertText(), ALERT_MESSAGE);
-        UIHelper.closeAlert();
+        UIHelper.acceptAlert();
         return this;
     }
 

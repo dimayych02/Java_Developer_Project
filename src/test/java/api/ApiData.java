@@ -18,11 +18,12 @@ public class ApiData {
         public static final String GENERATE_TOKEN_ENDPOINT = "Account/v1/GenerateToken";
         public static final String NEW_USER_ENDPOINT = "Account/v1/User";
         public static final String DELETE_USER_ENDPOINT="Account/v1/User/{UUID}";
+
     }
 
     public static final class UserData {
-        public static final String USER_NAME = "gfb";
-        public static final String USER_PASSWORD = "Iamadjd5683829f@";
+        public static final String USER_NAME = "dimyych02";
+        public static final String USER_PASSWORD = "Dima301020022@";
         public static String newUser= Generator.generateString();
         public static String newPassword=Generator.generatePassword();
     }

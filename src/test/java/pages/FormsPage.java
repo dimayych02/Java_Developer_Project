@@ -115,7 +115,8 @@ public class FormsPage extends UIHelper {
         selectYearButton.click();
         yearSelect.click();
         day.click();
-        Assert.assertTrue(getAttributeValue(dateOFBirth,"value").equals("30 Oct 2002"));
+        Assert.assertTrue(getAttributeValue(dateOFBirth,"value")
+                .equals("30 Oct 2002"),"Выбранный атрибут не совпадает с ожидаемым аттрибутом!");
         return this;
     }
 

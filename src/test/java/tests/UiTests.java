@@ -147,7 +147,7 @@ public class UiTests {
     public void uiAndApiBooks() {
         mainPage.clickToBookStore();
         bookStorePage.scrollToAllBooksTitle();
-        Assert.assertEquals(bookStorePage.getBooksTitleUI(), BookAttributes.getBooksTitleApi());
+        Assert.assertEquals(bookStorePage.getBooksTitleUI(), BookAttributes.getBooksTitleApi(),"Ошибка, книги на api и ui не совпадают!");
     }
 
     @Test(retryAnalyzer = TestNGRetry.class)
@@ -155,7 +155,7 @@ public class UiTests {
         //Создание нового польхователя на бэке
         userName = Generator.generateString();
         password = Generator.generatePassword();
-        Assert.assertEquals(RequestToApi.fillJsonBody(userDataRegister, NEW_USER_ENDPOINT).statusCode(), 201);
+        Assert.assertEquals(RequestToApi.fillJsonBody(userDataRegister, NEW_USER_ENDPOINT).statusCode(), 201,"Ошибка,пользователь не был зарегистрирован на бэке!");
         mainPage.clickToBookStore();
         bookStorePage.spanLoginClick();
         bookStorePage.fillLogin(userName);
@@ -176,7 +176,7 @@ public class UiTests {
         bookStorePage.fillPassword(password);
         bookStorePage.captchaClick();
         bookStorePage.registerClick();
-        Assert.assertEquals(RequestToApi.fillJsonBody(USER_DATA_AUTH, AUTHORIZATION_ENDPOINT), 201);
+        Assert.assertEquals(RequestToApi.fillJsonBody(USER_DATA_AUTH, AUTHORIZATION_ENDPOINT), 201,"Ошибка статус-код не 201!");
     }
 
     @Test
@@ -184,6 +184,15 @@ public class UiTests {
         mainPage.clickToAlerts();
         alertPage.browserWindowsClick();
         alertPage.newTabClick();
+    }
+
+    @Test
+    public void clickToAllTypeAlerts(){
+        mainPage.clickToAlerts();
+        alertPage.alertsClick();
+        alertPage.firstAlertClick();
+        alertPage.secondAlertClick();
+        alertPage.thirdAlertClick();
     }
 
     @AfterMethod

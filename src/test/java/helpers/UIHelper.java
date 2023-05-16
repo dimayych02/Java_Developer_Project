@@ -44,11 +44,15 @@ public class UIHelper extends UiTests {
         return findStrategy;
     }
 
+    public static void waitForAlertPresented(long timeoutInSeconds) {
+        getWaiter(timeoutInSeconds).until(ExpectedConditions.alertIsPresent());
+    }
+
     public static WebDriver frameElement(WebElement frame) {
         return driver.switchTo().frame(frame);
     }
 
-    public static void closeAlert() {
+    public static void acceptAlert() {
         driver.switchTo().alert().accept();
     }
 
@@ -65,6 +69,7 @@ public class UIHelper extends UiTests {
         }
     }
 
+
     public static String redirectUrl() {
         String window1 = driver.getWindowHandle();
         Set<String> currentWindows = driver.getWindowHandles();
@@ -78,7 +83,8 @@ public class UIHelper extends UiTests {
     }
 
     public static String getAttributeValue(WebElement element, String attribute) {
-        return element.getAttribute(attribute);
+        return element
+                .getAttribute(attribute);
     }
 
 }

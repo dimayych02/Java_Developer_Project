@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-public class ElementsPage  {
+public class ElementsPage {
     private String generatedFirstName;
     private final String URL = ApiData.Endpoints.BASE_URL;
     private WebDriver driver;
@@ -174,21 +174,21 @@ public class ElementsPage  {
     public ElementsPage clickSubmitButton() {
         UIHelper.scrollToElement(submitButton);
         submitButton.click();
-        Assert.assertTrue(UIHelper.checkElementVisible(checkFillForm));
+        Assert.assertTrue(UIHelper.checkElementVisible(checkFillForm),"Элемент не виден в DOM-дереве!");
         return this;
     }
 
     @Step("Выбор пути")
     public ElementsPage clickPathCheckmark() {
         pathCheckmark.click();
-        Assert.assertTrue(UIHelper.checkElementVisible(checkSelectedFolders));
+        Assert.assertTrue(UIHelper.checkElementVisible(checkSelectedFolders), "Элемент не виден в DOM-дереве!");
         return this;
     }
 
     @Step("Клик по одному из элементов Radio Button")
     public ElementsPage clickRadioButtonElement() {
         radioButtonElement.click();
-        Assert.assertTrue(UIHelper.checkElementVisible(checkSelectedRadioButton));
+        Assert.assertTrue(UIHelper.checkElementVisible(checkSelectedRadioButton), "Элемент не виден в DOM-дереве!");
         return this;
     }
 
@@ -232,7 +232,9 @@ public class ElementsPage  {
     @Step("Клик по кнопке submit после создания нового пользователя в WebTable")
     public ElementsPage submitButtonClick() {
         submitButton.click();
-        Assert.assertTrue(getUsers(usersByFirstName).stream().anyMatch(x -> x.contains(generatedFirstName)));
+        Assert.assertTrue(getUsers(usersByFirstName)
+                .stream()
+                .anyMatch(x -> x.contains(generatedFirstName)), "Пользователь с такими данными не был найден!");
         return this;
     }
 
@@ -249,28 +251,28 @@ public class ElementsPage  {
     @Step("Клик по кнопке clickMe")
     public ElementsPage buttonClickMe() {
         clickMeButton.click();
-        Assert.assertTrue(UIHelper.checkElementVisible(messageAfterClick));
+        Assert.assertTrue(UIHelper.checkElementVisible(messageAfterClick), "Элемент не виден в DOM-дереве!");
         return this;
     }
 
     @Step("Клик по  homeLink")
     public ElementsPage homeLinkClick() {
         homeLink.click();
-        Assert.assertEquals(UIHelper.redirectUrl(), URL);
+        Assert.assertEquals(UIHelper.redirectUrl(), URL,"Redirect URLs не совпадают!");
         return this;
     }
 
     @Step("Клик по  validLink")
     public ElementsPage validLinkClick() {
         validLink.click();
-        Assert.assertEquals(UIHelper.redirectUrl(), URL);
+        Assert.assertEquals(UIHelper.redirectUrl(), URL,"Redirect URLs не совпадают!");
         return this;
     }
 
     @Step("Клик по кнопке download")
     public ElementsPage downloadClick() throws InterruptedException {
         downloadButton.click();
-        Assert.assertTrue(DownloadFile.checkDownloadedFile());
+        Assert.assertTrue(DownloadFile.checkDownloadedFile(),"Файл не был скачен!");
         return this;
     }
 
@@ -278,11 +280,11 @@ public class ElementsPage  {
     public ElementsPage colorChangeClick() {
         colorChange.click();
         visibleAfterSeconds = UIHelper.waitForElementVisible(visibleAfterSeconds, 5);
-        Assert.assertTrue(UIHelper.checkElementVisible(visibleAfterSeconds));
+        Assert.assertTrue(UIHelper.checkElementVisible(visibleAfterSeconds), "Элемент не виден в DOM-дереве!");
         return this;
     }
 
-    private List<String> getUsers(List<WebElement> usersElement) throws NullPointerException{
+    private List<String> getUsers(List<WebElement> usersElement) throws NullPointerException {
         return usersElement.stream()
                 .map(x -> x.getText())
                 .collect(Collectors.toList());
