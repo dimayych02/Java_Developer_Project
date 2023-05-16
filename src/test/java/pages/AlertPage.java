@@ -9,11 +9,17 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 public class AlertPage {
+
     private WebDriver driver;
+
     private final String REDIRECT_URL="https://demoqa.com/sample";
+
     private final String FIRST_ALERT_TEXT="You clicked a button";
+
     private final String SECOND_ALERT_TEXT="This alert appeared after 5 seconds";
+
     private final String THIRD_ALERT_TEXT="Do you confirm action?";
+
     private final String TEXT_AFTER_ALERT_CLICK="Ok";
 
     @FindBy(xpath="//span[text()='Browser Windows']")

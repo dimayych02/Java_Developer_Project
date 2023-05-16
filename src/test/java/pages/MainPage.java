@@ -7,6 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import helpers.UIHelper;
 
 public class MainPage extends UIHelper {
+
     private WebDriver driver;
 
     @FindBy(xpath = "//h5[text()='Elements']")

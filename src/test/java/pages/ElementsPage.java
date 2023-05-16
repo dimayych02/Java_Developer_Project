@@ -15,8 +15,11 @@ import java.util.stream.Collectors;
 
 
 public class ElementsPage {
+
     private String generatedFirstName;
+
     private final String URL = ApiData.Endpoints.BASE_URL;
+
     private WebDriver driver;
 
     @FindBy(xpath = "//li//*[text()='Text Box']")
