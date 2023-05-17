@@ -35,6 +35,7 @@ public class ApiData {
         
         public final static String USER_EXIST_MESSAGE = "User exists!";
     }
+    
     public static final class PathParams{
         
         public static final String UUID_PARAM= "UUID";
