@@ -19,7 +19,7 @@ public class ApiData {
         public static final String GENERATE_TOKEN_ENDPOINT = "Account/v1/GenerateToken";
         public static final String NEW_USER_ENDPOINT = "Account/v1/User";
         public static final String DELETE_USER_ENDPOINT="Account/v1/User/{UUID}";
-}
+    }
 
     
 
