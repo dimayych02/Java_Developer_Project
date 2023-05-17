@@ -4,8 +4,7 @@ import dataGenerator.Generator;
 
 public class ApiData {
 
-    public static final class Endpoints {
-        
+    public static final class Endpoints {      
         public static final String BASE_URL = "https://demoqa.com/";
         public static final String CREATED_ENDPOINT = "created";
         public static final String NO_CONTENT_ENDPOINT = "no-content";
@@ -20,24 +19,22 @@ public class ApiData {
         public static final String NEW_USER_ENDPOINT = "Account/v1/User";
         public static final String DELETE_USER_ENDPOINT="Account/v1/User/{UUID}";
     }
-
     
-
-    public static final class UserData {
-        
+    
+    public static final class UserData {      
         public static final String USER_NAME = "www";
         public static final String USER_PASSWORD = "dgdhdhDaf@ru";
         public static String newUser= Generator.generateString();
         public static String newPassword=Generator.generatePassword();
     }
+    
 
-    public static final class ResponseMessage {
-        
+    public static final class ResponseMessage {  
         public final static String USER_EXIST_MESSAGE = "User exists!";
     }
     
-    public static final class PathParams{
-        
+    
+    public static final class PathParams{   
         public static final String UUID_PARAM= "UUID";
     }
 }
