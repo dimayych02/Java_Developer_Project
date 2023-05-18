@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 
 
 public class ApiTests {
+    
     private final Object USER_DATA_AUTH = new BookStoreModel.AuthorizationData(ApiData.UserData.USER_NAME, ApiData.UserData.USER_PASSWORD);
     private Object userDataRegister = new BookStoreModel.AuthorizationData(ApiData.UserData.newUser, ApiData.UserData.newPassword);
     private final String USER_EXIST_MESSAGE = ApiData.ResponseMessage.USER_EXIST_MESSAGE;
