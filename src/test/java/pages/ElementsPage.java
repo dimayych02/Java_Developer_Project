@@ -102,7 +102,6 @@ public class ElementsPage {
 
     @FindBy(css = "span[title='Delete']")
     private List<WebElement> buttonDeleteUsers;
-    
     @FindBy(xpath = "//button[text()='Click Me']")
     private WebElement clickMeButton;
 
