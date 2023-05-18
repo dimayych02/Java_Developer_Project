@@ -2,11 +2,11 @@ package pages;
 
 import helpers.UIHelper;
 import io.qameta.allure.Step;
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -132,8 +132,8 @@ public class BookStorePage {
     @Step("Клик по кнопке Register")
     public BookStorePage registerClick() {
         registerButton.click();
-        Assert.assertTrue(UIHelper.isAlertPresent());
-        Assert.assertEquals(UIHelper.getAlertText(), ALERT_MESSAGE);
+        Assert.assertTrue(UIHelper.isAlertPresent(),"Alert не представлен!");
+        Assert.assertEquals(UIHelper.getAlertText(), ALERT_MESSAGE,"Текста WebElement и ожидаемый не совпадают!");
         UIHelper.acceptAlert();
         return this;
     }
@@ -142,12 +142,12 @@ public class BookStorePage {
     public BookStorePage loginClick() {
         loginButton.click();
         labelUserName = UIHelper.waitForElementVisible(labelUserName, 5);
-        Assert.assertTrue(UIHelper.checkElementVisible(labelUserName));
+        Assert.assertTrue(UIHelper.checkElementVisible(labelUserName),"Ошибка,элемента нет в DOM-дереве!");
         //Проверка успешной авторизации путем видимости label-элемента userName
         return this;
     }
 
-    public List<String> getBooksTitleUI() {
+    public List<String> getBooksTitleUI() throws NullPointerException {
         return listOfBooksTitle
                 .stream()
                 .map(x -> x.getText())
@@ -158,7 +158,7 @@ public class BookStorePage {
         return listOfBooksAuthor
                 .stream()
                 .map(x -> x.getText())
-                .filter(x -> x.matches("[A-Za-z]"))
+                .filter(x -> x.trim().length()>0)
                 .collect(Collectors.toList());
     }
 
@@ -166,7 +166,7 @@ public class BookStorePage {
         return listOFBooksPublisher
                 .stream()
                 .map(x -> x.getText())
-                .filter(x -> x.matches("[A-Za-z]"))
+                .filter(x -> x.trim().length()>0)
                 .collect(Collectors.toList());
     }
 

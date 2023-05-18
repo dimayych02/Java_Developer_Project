@@ -12,48 +12,56 @@ public class AlertPage {
 
     private WebDriver driver;
 
-    private final String REDIRECT_URL="https://demoqa.com/sample";
+    private final String REDIRECT_URL = "https://demoqa.com/sample";
 
-    private final String FIRST_ALERT_TEXT="You clicked a button";
+    private final String FIRST_ALERT_TEXT = "You clicked a button";
 
-    private final String SECOND_ALERT_TEXT="This alert appeared after 5 seconds";
+    private final String SECOND_ALERT_TEXT = "This alert appeared after 5 seconds";
 
-    private final String THIRD_ALERT_TEXT="Do you confirm action?";
+    private final String THIRD_ALERT_TEXT = "Do you confirm action?";
 
-    private final String TEXT_AFTER_ALERT_CLICK="Ok";
+    private final String TEXT_AFTER_ALERT_CLICK = "Ok";
 
-    @FindBy(xpath="//span[text()='Browser Windows']")
+    private final String FILL_ALERT_WITH_TEXT = "Hello world!";
+
+    @FindBy(xpath = "//span[text()='Browser Windows']")
     private WebElement browserWindows;
 
-    @FindBy(xpath="//span[text()='Alerts']")
+    @FindBy(xpath = "//span[text()='Alerts']")
     private WebElement alerts;
 
-    @FindBy(xpath="//span[text()='Frames']")
+    @FindBy(xpath = "//span[text()='Frames']")
     private WebElement frames;
 
-    @FindBy(xpath="//span[text()='Nested Frames']")
+    @FindBy(xpath = "//span[text()='Nested Frames']")
     private WebElement nestedFrames;
 
-    @FindBy(xpath="//span[text()='Modal Dialogs']")
+    @FindBy(xpath = "//span[text()='Modal Dialogs']")
     private WebElement modalDialogs;
 
-    @FindBy(xpath="//*[text()='New Tab']")
+    @FindBy(xpath = "//*[text()='New Tab']")
     private WebElement newTabButton;
 
-    @FindBy(xpath="//*[text()='This is a sample page']")
+    @FindBy(xpath = "//*[text()='This is a sample page']")
     private WebElement redirectPageText;
 
-    @FindBy(id="alertButton")
+    @FindBy(id = "alertButton")
     private WebElement clickButtonToSeeAlert;
 
-    @FindBy(id="timerAlertButton")
+    @FindBy(id = "timerAlertButton")
     private WebElement timeAlert;
 
-    @FindBy(id="confirmButton")
+    @FindBy(id = "confirmButton")
     private WebElement confirmAlert;
 
-    @FindBy(id="confirmResult")
+    @FindBy(id = "promtButton")
+    private WebElement promptAlertButton;
+
+    @FindBy(id = "confirmResult")
     private WebElement confirmAlertResult;
+
+    @FindBy(id = "promptResult")
+    private WebElement promptAlertResult;
 
 
     public AlertPage(WebDriver driver) {
@@ -62,67 +70,76 @@ public class AlertPage {
     }
 
     @Step("Клик по кнопке Browser Windows")
-    public AlertPage browserWindowsClick(){
+    public AlertPage browserWindowsClick() {
         browserWindows.click();
         return this;
     }
 
     @Step("Клик по кнопке Alerts")
-    public AlertPage alertsClick(){
+    public AlertPage alertsClick() {
         alerts.click();
         return this;
     }
 
     @Step("Клик по кнопке Frames")
-    public AlertPage framesClick(){
+    public AlertPage framesClick() {
         frames.click();
         return this;
     }
 
     @Step("Клик по кнопке Nested Frames")
-    public AlertPage nestedFramesClick(){
+    public AlertPage nestedFramesClick() {
         nestedFrames.click();
         return this;
     }
 
     @Step("Клик по кнопке Modal Dialogs")
-    public AlertPage modalDialogsClick(){
+    public AlertPage modalDialogsClick() {
         modalDialogs.click();
         return this;
     }
 
     @Step("Клик по кнопке New Tab")
-    public AlertPage newTabClick(){
+    public AlertPage newTabClick() {
         newTabButton.click();
-        Assert.assertEquals(REDIRECT_URL,UIHelper.redirectUrl(),"Redirect-URL не совпадает с актуальной");
-        Assert.assertTrue(UIHelper.checkElementVisible(redirectPageText),"Элемент не виден в DOM-дереве!");
+        Assert.assertEquals(REDIRECT_URL, UIHelper.redirectUrl(), "Redirect-URL не совпадает с актуальной");
+        Assert.assertTrue(UIHelper.checkElementVisible(redirectPageText), "Элемент не виден в DOM-дереве!");
         return this;
     }
 
     @Step("Клик по первой кнопке Alert")
-    public AlertPage firstAlertClick(){
+    public AlertPage firstAlertClick() {
         clickButtonToSeeAlert.click();
-        Assert.assertEquals(UIHelper.getAlertText(),FIRST_ALERT_TEXT," alert-сообщения не совпадают!");
+        Assert.assertEquals(UIHelper.getAlertText(), FIRST_ALERT_TEXT, " alert-сообщения не совпадают!");
         UIHelper.acceptAlert();
         return this;
     }
 
     @Step("Клик по второй кнопке Alert")
-    public AlertPage secondAlertClick(){
+    public AlertPage secondAlertClick() {
         timeAlert.click();
         UIHelper.waitForAlertPresented(5);
-        Assert.assertEquals(UIHelper.getAlertText(),SECOND_ALERT_TEXT," alert-сообщения не совпадают!");
+        Assert.assertEquals(UIHelper.getAlertText(), SECOND_ALERT_TEXT, " alert-сообщения не совпадают!");
         UIHelper.acceptAlert();
         return this;
     }
 
-    @Step("Клик по второй кнопке Alert")
-    public AlertPage thirdAlertClick(){
+    @Step("Клик по третьей кнопке Alert")
+    public AlertPage thirdAlertClick() {
         confirmAlert.click();
-        Assert.assertEquals(UIHelper.getAlertText(),THIRD_ALERT_TEXT," alert-сообщения не совпадают!");
+        Assert.assertEquals(UIHelper.getAlertText(), THIRD_ALERT_TEXT, " alert-сообщения не совпадают!");
         UIHelper.acceptAlert();
-        Assert.assertTrue(UIHelper.checkElementVisible(confirmAlertResult),"Элемент не виден в DOM-дереве!");
-        Assert.assertTrue(confirmAlertResult.getText().contains(TEXT_AFTER_ALERT_CLICK),"WebElement  не содержит данный текст!");
+        Assert.assertTrue(UIHelper.checkElementVisible(confirmAlertResult), "Элемент не виден в DOM-дереве!");
+        Assert.assertTrue(confirmAlertResult.getText().contains(TEXT_AFTER_ALERT_CLICK), "WebElement  не содержит данный текст!");
+        return this;
+    }
+
+    @Step("Клик по четвертой кнопке Alert")
+    public AlertPage fourthAlertClick() {
+        promptAlertButton.click();
+        driver.switchTo().alert().sendKeys(FILL_ALERT_WITH_TEXT);
+        UIHelper.acceptAlert();
+        Assert.assertTrue(promptAlertResult.getText().contains(FILL_ALERT_WITH_TEXT));
         return this;
     }
 }

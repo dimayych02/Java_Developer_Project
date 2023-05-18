@@ -9,6 +9,7 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
 public class RestAssuredHelper {
+
     private static TypesOfRequest type;
     private RequestSpecification request;
 

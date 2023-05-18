@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import helpers.UIHelper;
 
-public class MainPage extends UIHelper {
+public class MainPage {
 
     private WebDriver driver;
 
@@ -35,19 +35,19 @@ public class MainPage extends UIHelper {
     }
 
     public MainPage clickToElements() {
-        scrollToElement(buttonElements);
+        UIHelper.scrollToElement(buttonElements);
         buttonElements.click();
         return this;
     }
 
     public MainPage clickToForms() {
-        scrollToElement(buttonForms);
+        UIHelper.scrollToElement(buttonForms);
         buttonForms.click();
         return this;
     }
 
     public MainPage clickToAlerts() {
-        scrollToElement(buttonAlerts);
+        UIHelper.scrollToElement(buttonAlerts);
         buttonAlerts.click();
         return this;
     }
@@ -63,7 +63,7 @@ public class MainPage extends UIHelper {
     }
 
     public MainPage clickToBookStore() {
-        scrollToElement(buttonElements);
+        UIHelper.scrollToElement(buttonElements);
         buttonBookStore.click();
         return this;
     }
