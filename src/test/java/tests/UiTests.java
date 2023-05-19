@@ -20,11 +20,13 @@ import org.testng.annotations.Test;
 public class UiTests {
 
     public static WebDriver driver;
+
     private MainPage mainPage;
     private ElementsPage elementsPage;
     private FormsPage formsPage;
     private BookStorePage bookStorePage;
     private AlertPage alertPage;
+    
     private String userName;
     private String password;
     private final String URL = ApiData.Endpoints.BASE_URL;
@@ -197,6 +199,13 @@ public class UiTests {
         alertPage.secondAlertClick();
         alertPage.thirdAlertClick();
         alertPage.fourthAlertClick();
+    }
+
+    @Test
+    public void getFrameText() {
+        mainPage.clickToAlerts();
+        alertPage.framesClick();
+        alertPage.getFrameText();
     }
 
     @AfterMethod

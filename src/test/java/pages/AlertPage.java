@@ -13,16 +13,12 @@ public class AlertPage {
     private WebDriver driver;
 
     private final String REDIRECT_URL = "https://demoqa.com/sample";
-
     private final String FIRST_ALERT_TEXT = "You clicked a button";
-
     private final String SECOND_ALERT_TEXT = "This alert appeared after 5 seconds";
-
     private final String THIRD_ALERT_TEXT = "Do you confirm action?";
-
     private final String TEXT_AFTER_ALERT_CLICK = "Ok";
-
     private final String FILL_ALERT_WITH_TEXT = "Hello world!";
+    private final String FRAME_TEXT="This is a sample page";
 
     @FindBy(xpath = "//span[text()='Browser Windows']")
     private WebElement browserWindows;
@@ -63,6 +59,12 @@ public class AlertPage {
     @FindBy(id = "promptResult")
     private WebElement promptAlertResult;
 
+    @FindBy(id="frame1")
+    private WebElement iframe;
+
+    @FindBy(id="sampleHeading")
+    private WebElement sampleFrame;
+
 
     public AlertPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
@@ -83,6 +85,7 @@ public class AlertPage {
 
     @Step("Клик по кнопке Frames")
     public AlertPage framesClick() {
+        UIHelper.scrollToElement(frames);
         frames.click();
         return this;
     }
@@ -140,6 +143,13 @@ public class AlertPage {
         driver.switchTo().alert().sendKeys(FILL_ALERT_WITH_TEXT);
         UIHelper.acceptAlert();
         Assert.assertTrue(promptAlertResult.getText().contains(FILL_ALERT_WITH_TEXT));
+        return this;
+    }
+
+    @Step("Получение текста из iframe")
+    public AlertPage getFrameText(){
+        UIHelper.frameElement(iframe);
+        Assert.assertEquals(FRAME_TEXT,sampleFrame.getText());
         return this;
     }
 }

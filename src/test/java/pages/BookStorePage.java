@@ -12,8 +12,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class BookStorePage {
-    
+
     private WebDriver driver;
+
     private final String ALERT_MESSAGE = "User Register Successfully.";
 
     @FindBy(xpath = "//span[text()='Login']")
@@ -57,6 +58,7 @@ public class BookStorePage {
 
     @FindBy(css = "div[class=recaptcha-checkbox-border]")
     private WebElement captchaButton;
+
 
 
     public BookStorePage(WebDriver driver) {
