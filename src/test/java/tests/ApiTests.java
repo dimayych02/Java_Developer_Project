@@ -27,73 +27,73 @@ public class ApiTests {
 
     @Test
     public void successAuthorization() {
-        Assert.assertEquals(RequestToApi.fillJsonBody(USER_DATA_AUTH, AUTHORIZATION_ENDPOINT)
+        Assert.assertEquals(RequestToApi.methodPOST(USER_DATA_AUTH, AUTHORIZATION_ENDPOINT)
                 .statusCode(), 200);
     }
 
     @Test
     public void failedUserRegister() {
-        Assert.assertEquals(RequestToApi.fillJsonBody(USER_DATA_AUTH, NEW_USER_ENDPOINT)
+        Assert.assertEquals(RequestToApi.methodPOST(USER_DATA_AUTH, NEW_USER_ENDPOINT)
                 .statusCode(), 406);
-        Assert.assertEquals(RequestToApi.extractResponse(RequestToApi.fillJsonBody(USER_DATA_AUTH, NEW_USER_ENDPOINT))
+        Assert.assertEquals(RequestToApi.extractResponse(RequestToApi.methodPOST(USER_DATA_AUTH, NEW_USER_ENDPOINT))
                 .getMessage(), USER_EXIST_MESSAGE);
     }
 
-    @Test(retryAnalyzer = TestNGRetry.class,priority = -1)
+    @Test(retryAnalyzer = TestNGRetry.class, priority = -1)
     public void successUserRegister() {
-        Assert.assertTrue(RequestToApi.extractResponse(RequestToApi.fillJsonBody(userDataRegister, NEW_USER_ENDPOINT))
+        Assert.assertTrue(RequestToApi.extractResponse(RequestToApi.methodPOST(userDataRegister, NEW_USER_ENDPOINT))
                 .getUserID() != null);
     }
 
     @Test
     public void getUserToken() {
-        Assert.assertTrue(RequestToApi.extractResponse(RequestToApi.fillJsonBody(USER_DATA_AUTH, GENERATE_TOKEN_ENDPOINT))
+        Assert.assertTrue(RequestToApi.extractResponse(RequestToApi.methodPOST(USER_DATA_AUTH, GENERATE_TOKEN_ENDPOINT))
                 .getToken() != null);
     }
 
     @Test
     public void deleteUser() {
-        String userID = (String) RequestToApi.extractResponse(RequestToApi.fillJsonBody(userDataRegister, NEW_USER_ENDPOINT)).getUserID();
-        Assert.assertEquals(RequestToApi.deleteUser(UUID_PARAM, userID, DELETE_USER_ENDPOINT).statusCode(), 200);
+        String userID = (String) RequestToApi.extractResponse(RequestToApi.methodPOST(userDataRegister, NEW_USER_ENDPOINT)).getUserID();
+        Assert.assertEquals(RequestToApi.methodDELETE(UUID_PARAM, userID, DELETE_USER_ENDPOINT).statusCode(), 200);
     }
 
     @Test
     public void createdLinkRequest() {
-        Assert.assertEquals(RequestToApi.requestToServer(CREATED_ENDPOINT).statusCode(), 201);
+        Assert.assertEquals(RequestToApi.methodGET(CREATED_ENDPOINT).statusCode(), 201);
     }
 
     @Test
     public void noContentLinkRequest() {
-        Assert.assertEquals(RequestToApi.requestToServer(NO_CONTENT_ENDPOINT).statusCode(), 204);
+        Assert.assertEquals(RequestToApi.methodGET(NO_CONTENT_ENDPOINT).statusCode(), 204);
     }
 
     @Test
     public void linkMovedRequest() {
-        Assert.assertEquals(RequestToApi.requestToServer(MOVED_ENDPOINT).statusCode(),
+        Assert.assertEquals(RequestToApi.methodGET(MOVED_ENDPOINT).statusCode(),
                 301);
     }
 
     @Test
     public void linkBadRequest() {
-        Assert.assertEquals(RequestToApi.requestToServer(BAD_REQUEST_ENDPOINT).statusCode(),
+        Assert.assertEquals(RequestToApi.methodGET(BAD_REQUEST_ENDPOINT).statusCode(),
                 400);
     }
 
     @Test
     public void linkUnauthorizedRequest() {
-        Assert.assertEquals(RequestToApi.requestToServer(UNAUTHORIZED_ENDPOINT).statusCode(),
+        Assert.assertEquals(RequestToApi.methodGET(UNAUTHORIZED_ENDPOINT).statusCode(),
                 401);
     }
 
     @Test
     public void linkForbiddenRequest() {
-        Assert.assertEquals(RequestToApi.requestToServer(FORBIDDEN_ENDPOINT).statusCode(),
+        Assert.assertEquals(RequestToApi.methodGET(FORBIDDEN_ENDPOINT).statusCode(),
                 403);
     }
 
     @Test
     public void linkNotFoundRequest() {
-        Assert.assertEquals(RequestToApi.requestToServer(NOT_FOUND_ENDPOINT).statusCode(),
+        Assert.assertEquals(RequestToApi.methodGET(NOT_FOUND_ENDPOINT).statusCode(),
                 404);
     }
 

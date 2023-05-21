@@ -160,7 +160,7 @@ public class UiTests {
         //Создание нового польхователя на бэке
         userName = Generator.generateString();
         password = Generator.generatePassword();
-        Assert.assertEquals(RequestToApi.fillJsonBody(userDataRegister, NEW_USER_ENDPOINT).statusCode(), 201, "Ошибка,пользователь не был зарегистрирован на бэке!");
+        Assert.assertEquals(RequestToApi.methodPOST(userDataRegister, NEW_USER_ENDPOINT).statusCode(), 201, "Ошибка,пользователь не был зарегистрирован на бэке!");
         mainPage.clickToBookStore();
         bookStorePage.spanLoginClick();
         bookStorePage.fillLogin(userName);
@@ -181,7 +181,7 @@ public class UiTests {
         bookStorePage.fillPassword(password);
         bookStorePage.captchaClick();
         bookStorePage.registerClick();
-        Assert.assertEquals(RequestToApi.fillJsonBody(USER_DATA_AUTH, AUTHORIZATION_ENDPOINT), 201, "Ошибка статус-код не 201!");
+        Assert.assertEquals(RequestToApi.methodPOST(USER_DATA_AUTH, AUTHORIZATION_ENDPOINT), 201, "Ошибка статус-код не 201!");
     }
 
     @Test

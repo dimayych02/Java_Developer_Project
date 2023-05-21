@@ -12,18 +12,17 @@ import java.util.List;
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class BookStoreModel {
-    private List<Books> books;
+    private List<Book> books;
     private String token;
     private String username;
     private String userID;
     private String message;
 
-
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class Books {
+    public static class Book {
         private String isbn;
         private String username;
         private String title;
@@ -41,7 +40,14 @@ public class BookStoreModel {
         private String userName;
         private String password;
     }
+
 }
+
+
+
+
+
+
 
 
 

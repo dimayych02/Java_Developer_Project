@@ -1,5 +1,6 @@
 package helpers;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -12,19 +13,18 @@ import java.util.Set;
 
 
 public class UIHelper extends UiTests {
+    @Step("Прокрутка до элемента на странице")
     public static void scrollToElement(WebElement element) {
         ((JavascriptExecutor) driver)
                 .executeScript("arguments[0].scrollIntoView();", element);
     }
 
-
+    @Step("Видимость элемента на странице")
     public static boolean checkElementVisible(WebElement element) {
-        if (element.isDisplayed()) {
-            return true;
-        }
-        return false;
+        return element.isDisplayed();
     }
 
+    @Step("Неявное ожидание с таймаутом")
     public static WebDriverWait getWaiter(long timeOutInSeconds) {
         WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(timeOutInSeconds));
         webDriverWait
@@ -34,20 +34,24 @@ public class UIHelper extends UiTests {
         return webDriverWait;
     }
 
+    @Step("Явное ожидание на видимость элемента")
     public static WebElement waitForElementVisible(WebElement findStrategy, long timeoutInSeconds) {
         getWaiter(timeoutInSeconds).until(ExpectedConditions.visibilityOf(findStrategy));
         return findStrategy;
     }
 
+    @Step("Явное ожидание на видимость элементов")
     public static List<WebElement> waitForElementsVisible(List<WebElement> findStrategy, long timeoutInSeconds) {
         getWaiter(timeoutInSeconds).until(ExpectedConditions.visibilityOfAllElements(findStrategy));
         return findStrategy;
     }
 
+    @Step("Явное ожидание на появление Alert")
     public static void waitForAlertPresented(long timeoutInSeconds) {
         getWaiter(timeoutInSeconds).until(ExpectedConditions.alertIsPresent());
     }
 
+    @Step("Переключение на frame")
     public static WebDriver frameElement(WebElement frame) {
         return driver.switchTo().frame(frame);
     }
@@ -56,10 +60,12 @@ public class UIHelper extends UiTests {
         driver.switchTo().alert().accept();
     }
 
+    @Step("Получение Alert-текста")
     public static String getAlertText() {
         return driver.switchTo().alert().getText();
     }
 
+    @Step("Представлен ли Alert")
     public static boolean isAlertPresent() {
         try {
             driver.switchTo().alert();
@@ -69,7 +75,7 @@ public class UIHelper extends UiTests {
         }
     }
 
-
+    @Step("URL переадресации")
     public static String redirectUrl() {
         String window1 = driver.getWindowHandle();
         Set<String> currentWindows = driver.getWindowHandles();
@@ -82,9 +88,9 @@ public class UIHelper extends UiTests {
         return driver.getCurrentUrl();
     }
 
+    @Step("Получение атрибута элемента")
     public static String getAttributeValue(WebElement element, String attribute) {
-        return element
-                .getAttribute(attribute);
+        return element.getAttribute(attribute);
     }
 
 }
