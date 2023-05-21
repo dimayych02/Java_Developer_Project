@@ -10,7 +10,10 @@ public class BookAttributes {
     @Step("Получение название книг на api")
     public static List<String> getBooksTitleApi() {
         return RequestToApi.extractResponse(RequestToApi.methodGET(ApiData.Endpoints.GET_BOOKS_ENDPOINT))
-                .getBooks().stream().map(x -> x.getTitle()).collect(Collectors.toList());
+                .getBooks()
+                .stream()
+                .map(x -> x.getTitle())
+                .collect(Collectors.toList());
     }
 
     @Step("Получение  списка авторов книг на api")
