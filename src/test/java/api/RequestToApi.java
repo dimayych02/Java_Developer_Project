@@ -17,17 +17,17 @@ public class RequestToApi {
     }
 
     @Step("Метод POST")
-    public static Response methodPOST(Object jsonBody, String endpoint) {
+    public static Response methodPOST(Object jsonBody, String basePath) {
         return new RestAssuredHelper(POST)
                 .setBody(jsonBody)
-                .makeRequest(endpoint);
+                .makeRequest(basePath);
     }
 
     @Step("Метод DELETE")
-    public static Response methodDELETE(String pathParam, String value, String endpoint) {
+    public static Response methodDELETE(String pathParam, String value, String basePath) {
         return new RestAssuredHelper(DELETE)
                 .setPathParam(pathParam, value)
-                .makeRequest(endpoint);
+                .makeRequest(basePath);
     }
 
     @Step("Извлечение Response в BookStoreModel")
