@@ -7,12 +7,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class BookAttributes {
+
     @Step("Получение название книг на api")
     public static List<String> getBooksTitleApi() {
         return RequestToApi.extractResponse(RequestToApi.methodGET(ApiData.Endpoints.GET_BOOKS_ENDPOINT))
                 .getBooks()
                 .stream()
-                .map(x -> x.getTitle())
+                .map(x -> x.getTitle().toString())
                 .collect(Collectors.toList());
     }
 

@@ -9,21 +9,21 @@ import static helpers.RestAssuredHelper.TypesOfRequest.*;
 
 public class RequestToApi {
 
-    @Step("Метод GET для получения информации")
+    @Step("Метод GET")
     public static Response methodGET(String basePath) {
         return new RestAssuredHelper(GET)
                 .setSpecification()
                 .makeRequest(basePath);
     }
 
-    @Step("Метод POST  c заполнением JSON-параметров  BODY")
+    @Step("Метод POST")
     public static Response methodPOST(Object jsonBody, String endpoint) {
         return new RestAssuredHelper(POST)
                 .setBody(jsonBody)
                 .makeRequest(endpoint);
     }
 
-    @Step("Метод DELETE с удалением JSON  данных")
+    @Step("Метод DELETE")
     public static Response methodDELETE(String pathParam, String value, String endpoint) {
         return new RestAssuredHelper(DELETE)
                 .setPathParam(pathParam, value)
