@@ -25,6 +25,7 @@ public class ApiTests {
     private final String DELETE_USER_ENDPOINT = ApiData.Endpoints.DELETE_USER_ENDPOINT;
     private final String UUID_PARAM = ApiData.PathParams.UUID_PARAM;
 
+
     @Test
     public void successAuthorization() {
         Assert.assertEquals(RequestToApi.methodPOST(USER_DATA_AUTH, AUTHORIZATION_ENDPOINT)
@@ -53,7 +54,8 @@ public class ApiTests {
 
     @Test
     public void deleteUser() {
-        String userID = (String) RequestToApi.extractResponse(RequestToApi.methodPOST(userDataRegister, NEW_USER_ENDPOINT)).getUserID();
+        String userID = (String) RequestToApi.extractResponse(RequestToApi.methodPOST(userDataRegister, NEW_USER_ENDPOINT))
+                .getUserID();
         Assert.assertEquals(RequestToApi.methodDELETE(UUID_PARAM, userID, DELETE_USER_ENDPOINT).statusCode(), 200);
     }
 

@@ -53,6 +53,7 @@ public class MainPage {
     }
 
     public MainPage clickToWidgets() {
+        UIHelper.scrollToElement(buttonWidgets);
         buttonWidgets.click();
         return this;
     }

@@ -26,14 +26,15 @@ public class UiTests {
     private FormsPage formsPage;
     private BookStorePage bookStorePage;
     private AlertPage alertPage;
-    
+    private WidgetsPage widgetsPage;
+
     private String userName;
     private String password;
     private final String URL = ApiData.Endpoints.BASE_URL;
     private final String NEW_USER_ENDPOINT = ApiData.Endpoints.NEW_USER_ENDPOINT;
     private final String AUTHORIZATION_ENDPOINT = ApiData.Endpoints.AUTHORIZATION_ENDPOINT;
     private final Object USER_DATA_AUTH = new BookStoreModel.AuthorizationData(ApiData.UserData.USER_NAME, ApiData.UserData.USER_PASSWORD);
-    private Object userDataRegister = new BookStoreModel.AuthorizationData(ApiData.UserData.newUser, ApiData.UserData.newPassword);
+    private BookStoreModel.AuthorizationData userDataRegister = new BookStoreModel.AuthorizationData(ApiData.UserData.newUser, ApiData.UserData.newPassword);
 
 
     @BeforeMethod
@@ -45,6 +46,7 @@ public class UiTests {
         formsPage = new FormsPage(driver);
         bookStorePage = new BookStorePage(driver);
         alertPage = new AlertPage(driver);
+        widgetsPage= new WidgetsPage(driver);
         driver.get(URL);
     }
 
@@ -155,12 +157,12 @@ public class UiTests {
         Assert.assertEquals(bookStorePage.getBooksPublisherUI(), BookAttributes.getBooksPublisherApi(), "Писатели книг на api и ui не совпадают!");
     }
 
-    @Test(retryAnalyzer = TestNGRetry.class)
+    @Test
     public void uiAuthorizationWithApiRegister() { //создание пользователя на бэке и авторизация на UI
         //Создание нового польхователя на бэке
-        userName = Generator.generateString();
-        password = Generator.generatePassword();
         Assert.assertEquals(RequestToApi.methodPOST(userDataRegister, NEW_USER_ENDPOINT).statusCode(), 201, "Ошибка,пользователь не был зарегистрирован на бэке!");
+        userName = userDataRegister.getUserName();
+        password = userDataRegister.getPassword();
         mainPage.clickToBookStore();
         bookStorePage.spanLoginClick();
         bookStorePage.fillLogin(userName);
@@ -206,6 +208,13 @@ public class UiTests {
         mainPage.clickToAlerts();
         alertPage.framesClick();
         alertPage.getFrameText();
+    }
+
+    @Test
+    public void widgetTest(){
+        mainPage.clickToWidgets();
+        widgetsPage.accordianClick();
+        widgetsPage.clickToAllAccordianElements();
     }
 
     @AfterMethod

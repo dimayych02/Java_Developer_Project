@@ -22,8 +22,8 @@ public class ApiData {
     }
 
     public static final class UserData {
-        public static final String USER_NAME = "dimyych02";
-        public static final String USER_PASSWORD = "Dima301020022@";
+        public static final String USER_NAME = "gplSGPfusd";
+        public static final String USER_PASSWORD = "^IRDTZTTkakiywmj5@^";
         public static String newUser= Generator.generateString();
         public static String newPassword=Generator.generatePassword();
     }

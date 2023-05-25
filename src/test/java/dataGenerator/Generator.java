@@ -1,6 +1,7 @@
 package dataGenerator;
 
 import com.mifmif.common.regex.Generex;
+import io.qameta.allure.Step;
 import org.apache.commons.lang3.RandomStringUtils;
 
 
@@ -15,15 +16,16 @@ public class Generator {
     public static String generatePhoneNumber() {
         return new Generex("\\d{10}").random();
     }
-
+    @Step("Генерация строки")
     public static String generateString() {
-        return RandomStringUtils.randomAlphabetic(5);
+        return RandomStringUtils.randomAlphabetic(10);
     }
 
     public static Integer generateInteger() {
         return new Random().nextInt(100) + 1;
     }
 
+    @Step("Генерация пароля")
     public static String generatePassword(){
         return new Generex("^[A-Z]{6,10}+[a-z]{5,8}+\\d+[!@#\\$%\\^&\\*]{1,4}").random();
     }
