@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -33,36 +34,41 @@ public class MainPage {
         PageFactory.initElements(driver, this);
         this.driver = driver;
     }
-
+    @Step("Клик по разделу элементы")
     public MainPage clickToElements() {
         UIHelper.scrollToElement(buttonElements);
         buttonElements.click();
         return this;
     }
 
+    @Step("Клик по разделу форма")
     public MainPage clickToForms() {
         UIHelper.scrollToElement(buttonForms);
         buttonForms.click();
         return this;
     }
 
+    @Step("Клик по разделу модальные окна")
     public MainPage clickToAlerts() {
         UIHelper.scrollToElement(buttonAlerts);
         buttonAlerts.click();
         return this;
     }
 
+    @Step("Клик по разделу виджеты")
     public MainPage clickToWidgets() {
         UIHelper.scrollToElement(buttonWidgets);
         buttonWidgets.click();
         return this;
     }
 
+    @Step("Клик по разделу взаимодействия")
     public MainPage clickToInteractions() {
         buttonInteractions.click();
         return this;
     }
 
+    @Step("Клик по разделу книги")
     public MainPage clickToBookStore() {
         UIHelper.scrollToElement(buttonElements);
         buttonBookStore.click();

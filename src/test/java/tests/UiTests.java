@@ -153,7 +153,7 @@ public class UiTests {
         mainPage.clickToBookStore();
         bookStorePage.scrollToAllBooksTitle();
         Assert.assertEquals(bookStorePage.getBooksTitleUI(), BookAttributes.getBooksTitleApi(), "Названия книг на api и ui не совпадают!");
-        Assert.assertEquals(bookStorePage.getBooksAuthorUI(), BookAttributes.getBooksAuthorApi(), "Авторы книг на api и ui не совпадают");
+        Assert.assertEquals(bookStorePage.getBooksAuthorUI(), BookAttributes.getBooksAuthorApi(), "Авторы книг на api и ui не совпадают!");
         Assert.assertEquals(bookStorePage.getBooksPublisherUI(), BookAttributes.getBooksPublisherApi(), "Писатели книг на api и ui не совпадают!");
     }
 

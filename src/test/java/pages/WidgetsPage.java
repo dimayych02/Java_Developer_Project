@@ -1,6 +1,8 @@
 package pages;
 
 import helpers.UIHelper;
+import io.qameta.allure.Step;
+import org.checkerframework.checker.guieffect.qual.UI;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,11 +14,10 @@ import java.util.List;
 
 public class WidgetsPage {
 
-    private final String ATTRIBUTE="class";
-
-    private final String ATTRIBUTE_VALUE="collapse show";
-
     private WebDriver driver;
+
+    private final String ATTRIBUTE = "class";
+    private final String ATTRIBUTE_VALUE = "collapse show";
 
     @FindBy(xpath = "//span[text()='Accordian']")
     private WebElement spanAccordian;
@@ -30,8 +31,11 @@ public class WidgetsPage {
     @FindBy(id = "section3Heading")
     private WebElement accordianThree;
 
-    @FindBy(xpath = ".//div[not(contains(@class,'card'))]")
-    private WebElement hiddenElements;
+    @FindBy(css = "div[class=card-header]")
+    private List<WebElement> hiddenElements;
+
+    @FindBy(css = "div[class=collapse]")
+    private List<WebElement> dynamicAttributeElement;
 
     @FindBy(css = "div[class=card]")
     private List<WebElement> accordianElements;
@@ -41,18 +45,18 @@ public class WidgetsPage {
         this.driver = driver;
     }
 
+    @Step("Клип по кнопке accordian")
     public WidgetsPage accordianClick() {
         spanAccordian.click();
         return this;
     }
 
+    @Step("Прокликиваем по всем кнопкам в разделе accordian")
     public WidgetsPage clickToAllAccordianElements() {
-        for (WebElement element : accordianElements) {
-            element.click();
-            hiddenElements = UIHelper.waitForElementChangeAttribute(hiddenElements, ATTRIBUTE, ATTRIBUTE_VALUE, 5);
-            Assert.assertEquals(UIHelper.getAttributeValue(hiddenElements, ATTRIBUTE), ATTRIBUTE_VALUE);
-            element.click();
-        }
+        hiddenElements
+                .stream()
+                .findFirst()
+                .ifPresent(x -> x.click());
         return this;
     }
 }

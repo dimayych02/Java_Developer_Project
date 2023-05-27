@@ -20,12 +20,10 @@ public class UIHelper extends UiTests {
                 .executeScript("arguments[0].scrollIntoView();", element);
     }
 
-
     @Step("Видимость элемента на странице")
     public static boolean checkElementVisible(WebElement element) {
         return element.isDisplayed();
     }
-
 
     @Step("Неявное ожидание с таймаутом")
     public static WebDriverWait getWaiter(long timeOutInSeconds) {
@@ -37,7 +35,6 @@ public class UIHelper extends UiTests {
         return webDriverWait;
     }
 
-
     @Step("Явное ожидание на видимость элемента")
     public static WebElement waitForElementVisible(WebElement findStrategy, long timeoutInSeconds) {
         getWaiter(timeoutInSeconds)
@@ -45,12 +42,12 @@ public class UIHelper extends UiTests {
         return findStrategy;
     }
 
+    @Step("Явное ожидание пока аттрибут поменяет свое значение")
     public static WebElement waitForElementChangeAttribute(WebElement element, String attribute, String attributeValue, long timeoutInSeconds) {
         getWaiter(timeoutInSeconds)
                 .until(ExpectedConditions.attributeToBe(element, attribute, element.getAttribute(attributeValue)));
         return element;
     }
-
 
     @Step("Явное ожидание на видимость элементов")
     public static List<WebElement> waitForElementsVisible(List<WebElement> findStrategy, long timeoutInSeconds) {
@@ -59,31 +56,26 @@ public class UIHelper extends UiTests {
         return findStrategy;
     }
 
-
     @Step("Явное ожидание на появление Alert")
     public static void waitForAlertPresented(long timeoutInSeconds) {
         getWaiter(timeoutInSeconds)
-                .until(ExpectedConditions
-                        .alertIsPresent());
+                .until(ExpectedConditions.alertIsPresent());
     }
-
 
     @Step("Переключение на frame")
     public static WebDriver frameElement(WebElement frame) {
         return driver.switchTo().frame(frame);
     }
 
-
+    @Step("Нажимаем на кнопку OK в alert")
     public static void acceptAlert() {
         driver.switchTo().alert().accept();
     }
-
 
     @Step("Получение Alert-текста")
     public static String getAlertText() {
         return driver.switchTo().alert().getText();
     }
-
 
     @Step("Представлен ли Alert")
     public static boolean isAlertPresent() {
@@ -94,7 +86,6 @@ public class UIHelper extends UiTests {
             return false;
         }
     }
-
 
     @Step("URL переадресации")
     public static String redirectUrl() {
@@ -108,7 +99,6 @@ public class UIHelper extends UiTests {
         }
         return driver.getCurrentUrl();
     }
-
 
     @Step("Получение атрибута элемента")
     public static String getAttributeValue(WebElement element, String attribute) {
