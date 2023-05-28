@@ -87,7 +87,7 @@ public class UIHelper extends UiTests {
         }
     }
 
-    @Step("URL переадресации")
+    @Step("URL-переадресация")
     public static String redirectUrl() {
         String window1 = driver.getWindowHandle();
         Set<String> currentWindows = driver.getWindowHandles();

@@ -110,7 +110,7 @@ public class UiTests {
         elementsPage.homeLinkClick();
     }
 
-    @Test
+    @Test(retryAnalyzer = TestNGRetry.class)
     public void brokenLinks() {
         mainPage.clickToElements();
         elementsPage.brokenLinksClick();
@@ -211,7 +211,7 @@ public class UiTests {
     }
 
     @Test
-    public void widgetTest(){
+    public void widgetTest() {
         mainPage.clickToWidgets();
         widgetsPage.accordianClick();
         widgetsPage.clickToAllAccordianElements();

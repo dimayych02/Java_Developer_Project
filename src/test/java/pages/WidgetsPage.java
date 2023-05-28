@@ -2,8 +2,6 @@ package pages;
 
 import helpers.UIHelper;
 import io.qameta.allure.Step;
-import org.checkerframework.checker.guieffect.qual.UI;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,19 +15,10 @@ public class WidgetsPage {
     private WebDriver driver;
 
     private final String ATTRIBUTE = "class";
-    private final String ATTRIBUTE_VALUE = "collapse show";
+    private final String ATTRIBUTE_VALUE = "collapse";
 
     @FindBy(xpath = "//span[text()='Accordian']")
     private WebElement spanAccordian;
-
-    @FindBy(id = "section1Heading")
-    private WebElement accordianOne;
-
-    @FindBy(id = "section2Heading")
-    private WebElement accordianTwo;
-
-    @FindBy(id = "section3Heading")
-    private WebElement accordianThree;
 
     @FindBy(css = "div[class=card-header]")
     private List<WebElement> hiddenElements;
@@ -39,6 +28,7 @@ public class WidgetsPage {
 
     @FindBy(css = "div[class=card]")
     private List<WebElement> accordianElements;
+
 
     public WidgetsPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
@@ -53,10 +43,13 @@ public class WidgetsPage {
 
     @Step("Прокликиваем по всем кнопкам в разделе accordian")
     public WidgetsPage clickToAllAccordianElements() {
-        hiddenElements
-                .stream()
-                .findFirst()
-                .ifPresent(x -> x.click());
+        for (WebElement element : accordianElements) {
+            element.click();
+
+            for (WebElement attributeElement : dynamicAttributeElement) {
+                Assert.assertEquals(UIHelper.getAttributeValue(attributeElement, ATTRIBUTE), ATTRIBUTE_VALUE);
+            }
+        }
         return this;
     }
 }

@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 public class ElementsPage {
 
     private String generatedFirstName;
-
     private final String URL = ApiData.Endpoints.BASE_URL;
 
     private WebDriver driver;
@@ -40,7 +39,7 @@ public class ElementsPage {
     @FindBy(xpath = "//li//*[text()='Links']")
     private WebElement links;
 
-    @FindBy(xpath = "//li//*[text()='Broken Links']")
+    @FindBy(xpath = "//li//*[text()='Broken Links - Images']")
     private WebElement brokenLinks;
 
     @FindBy(xpath = "//li//*[text()='Upload and Download']")
@@ -321,6 +320,7 @@ public class ElementsPage {
         return this;
     }
 
+    @Step("Список пользователей")
     private List<String> getUsers(List<WebElement> usersElement) throws NullPointerException {
         return usersElement.stream()
                 .map(x -> x.getText())
