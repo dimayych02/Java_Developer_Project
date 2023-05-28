@@ -1,5 +1,6 @@
 package pages;
 
+import helpers.ActionsHelper;
 import helpers.UIHelper;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
@@ -14,11 +15,16 @@ public class WidgetsPage {
 
     private WebDriver driver;
 
-    private final String ATTRIBUTE = "class";
-    private final String ATTRIBUTE_VALUE = "collapse";
+    private final String ACCORDIAN_ATTRIBUTE = "class";
+    private final String ACCORDIAN_ATTRIBUTE_VALUE = "collapse";
+    private final String SLIDER_ATTRIBUTE = "value";
+    private final String SLIDER_VALUE_AFTER_MOVING = "56";
 
     @FindBy(xpath = "//span[text()='Accordian']")
     private WebElement spanAccordian;
+
+    @FindBy(xpath = "//span[text()='Slider']")
+    private WebElement slider;
 
     @FindBy(css = "div[class=card-header]")
     private List<WebElement> hiddenElements;
@@ -28,6 +34,12 @@ public class WidgetsPage {
 
     @FindBy(css = "div[class=card]")
     private List<WebElement> accordianElements;
+
+    @FindBy(css = "input[type=range]")
+    private WebElement dragSliderToX;
+
+    @FindBy(id = "sliderValue")
+    private WebElement sliderValueInput;
 
 
     public WidgetsPage(WebDriver driver) {
@@ -47,9 +59,17 @@ public class WidgetsPage {
             element.click();
 
             for (WebElement attributeElement : dynamicAttributeElement) {
-                Assert.assertEquals(UIHelper.getAttributeValue(attributeElement, ATTRIBUTE), ATTRIBUTE_VALUE);
+                Assert.assertEquals(UIHelper.getAttributeValue(attributeElement, ACCORDIAN_ATTRIBUTE), ACCORDIAN_ATTRIBUTE_VALUE, "Аттрибуты не совпадают!");
             }
         }
+        return this;
+    }
+
+    @Step("Перемещение элемента  slider по оси OX")
+    public WidgetsPage clickToSlider() {
+        slider.click();
+        new ActionsHelper(driver).DragAndDropElement(dragSliderToX, 30, 0);
+        Assert.assertEquals(UIHelper.getAttributeValue(sliderValueInput, SLIDER_ATTRIBUTE), SLIDER_VALUE_AFTER_MOVING);
         return this;
     }
 }

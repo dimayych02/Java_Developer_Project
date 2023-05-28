@@ -1,12 +1,11 @@
 package helpers;
 
 import io.qameta.allure.Step;
-import org.junit.rules.ExpectedException;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import tests.UiTests;
 
+import tests.UiTests;
 import java.time.Duration;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -40,13 +39,6 @@ public class UIHelper extends UiTests {
         getWaiter(timeoutInSeconds)
                 .until(ExpectedConditions.visibilityOf(findStrategy));
         return findStrategy;
-    }
-
-    @Step("Явное ожидание пока аттрибут поменяет свое значение")
-    public static WebElement waitForElementChangeAttribute(WebElement element, String attribute, String attributeValue, long timeoutInSeconds) {
-        getWaiter(timeoutInSeconds)
-                .until(ExpectedConditions.attributeToBe(element, attribute, element.getAttribute(attributeValue)));
-        return element;
     }
 
     @Step("Явное ожидание на видимость элементов")

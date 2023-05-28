@@ -217,6 +217,12 @@ public class UiTests {
         widgetsPage.clickToAllAccordianElements();
     }
 
+    @Test
+    public void moveSlider(){
+        mainPage.clickToWidgets();
+        widgetsPage.clickToSlider();
+    }
+
     @AfterMethod
     public void tearDown() {
         if (driver != null) {
