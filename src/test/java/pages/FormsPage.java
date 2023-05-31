@@ -9,7 +9,7 @@ import org.testng.Assert;
 import helpers.UIHelper;
 
 
-public class FormsPage extends UIHelper {
+public class FormsPage {
 
     private WebDriver driver;
 
@@ -138,7 +138,7 @@ public class FormsPage extends UIHelper {
         selectYearButton.click();
         yearSelect.click();
         day.click();
-        Assert.assertTrue(getAttributeValue(dateOFBirth, "value")
+        Assert.assertTrue(UIHelper.getAttributeValue(dateOFBirth, "value")
                 .equals("30 Oct 2002"), "Выбранный атрибут не совпадает с ожидаемым аттрибутом!");
         return this;
     }

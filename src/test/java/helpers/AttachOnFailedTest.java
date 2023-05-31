@@ -5,11 +5,11 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
+import tests.BaseUITests;
 
-import static tests.UiTests.driver;
 
 
-public class AttachOnFailedTest implements ITestListener {
+public class AttachOnFailedTest extends BaseUITests implements ITestListener   {
     @Attachment(value="screen")
     public byte[] saveScreenshotsOnFailure(){
         return ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);

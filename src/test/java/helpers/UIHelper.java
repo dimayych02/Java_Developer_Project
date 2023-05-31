@@ -5,14 +5,14 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import tests.UiTests;
+import tests.BaseUITests;
 import java.time.Duration;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
 
-public class UIHelper extends UiTests {
+public class UIHelper extends BaseUITests {
     @Step("Прокрутка до элемента на странице")
     public static void scrollToElement(WebElement element) {
         ((JavascriptExecutor) driver)
@@ -52,6 +52,12 @@ public class UIHelper extends UiTests {
     public static void waitForAlertPresented(long timeoutInSeconds) {
         getWaiter(timeoutInSeconds)
                 .until(ExpectedConditions.alertIsPresent());
+    }
+
+    @Step("Явное ожидание на содержание в аттрибуте веб-та нужного нам значения")
+    public static void waitForAttributeElementContains(WebElement findStrategy, String attribute, String attributeValue, long timeoutInSeconds) {
+        getWaiter(timeoutInSeconds)
+                .until(ExpectedConditions.not(ExpectedConditions.attributeContains(findStrategy, attribute, attributeValue)));
     }
 
     @Step("Переключение на frame")

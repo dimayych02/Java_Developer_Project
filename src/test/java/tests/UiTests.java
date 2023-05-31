@@ -8,47 +8,21 @@ import helpers.AttachOnFailedTest;
 import helpers.TestNGRetry;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
-import pages.*;
 import dataGenerator.Generator;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+
 @Listeners(AttachOnFailedTest.class)
-public class UiTests {
-
-    public static WebDriver driver;
-
-    private MainPage mainPage;
-    private ElementsPage elementsPage;
-    private FormsPage formsPage;
-    private BookStorePage bookStorePage;
-    private AlertPage alertPage;
-    private WidgetsPage widgetsPage;
+public class UiTests extends BaseUITests {
 
     private String userName;
     private String password;
-    private final String URL = ApiData.Endpoints.BASE_URL;
     private final String NEW_USER_ENDPOINT = ApiData.Endpoints.NEW_USER_ENDPOINT;
     private final String AUTHORIZATION_ENDPOINT = ApiData.Endpoints.AUTHORIZATION_ENDPOINT;
     private final Object USER_DATA_AUTH = new BookStoreModel.AuthorizationData(ApiData.UserData.USER_NAME, ApiData.UserData.USER_PASSWORD);
+
     private BookStoreModel.AuthorizationData userDataRegister = new BookStoreModel.AuthorizationData(ApiData.UserData.newUser, ApiData.UserData.newPassword);
 
-
-    @BeforeMethod
-    public void setUp() {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        mainPage = new MainPage(driver);
-        elementsPage = new ElementsPage(driver);
-        formsPage = new FormsPage(driver);
-        bookStorePage = new BookStorePage(driver);
-        alertPage = new AlertPage(driver);
-        widgetsPage= new WidgetsPage(driver);
-        driver.get(URL);
-    }
 
     @Test
     public void textBoxForm() {
@@ -218,17 +192,9 @@ public class UiTests {
     }
 
     @Test
-    public void moveSlider(){
+    public void moveSlider() {
         mainPage.clickToWidgets();
         widgetsPage.clickToSlider();
     }
 
-    @AfterMethod
-    public void tearDown() {
-        if (driver != null) {
-            driver.close();
-            driver.quit();
-            driver = null;
-        }
-    }
 }

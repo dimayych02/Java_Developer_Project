@@ -9,11 +9,9 @@ public class ActionsHelper {
 
     private WebDriver driver;
 
-
     public ActionsHelper(WebDriver driver){
         this.driver=driver;
     }
-
 
     @Step("Action-перемещение элемента по осям OX,OY")
     public ActionsHelper DragAndDropElement(WebElement element, int x, int y) {
