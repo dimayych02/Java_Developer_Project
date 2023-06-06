@@ -29,3 +29,7 @@ dependencies {
 tasks.test {
     useTestNG()
 }
+
+tasks.withType<JavaCompile> {
+    options.encoding = "UTF-8"
+}
