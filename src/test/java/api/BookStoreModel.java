@@ -2,6 +2,7 @@ package api;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,17 +12,20 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Builder
 public class BookStoreModel {
     private List<Book> books;
     private String token;
-    private String username;
     private String userID;
     private String message;
+    private String userName;
+    private String password;
 
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
     @JsonIgnoreProperties(ignoreUnknown = true)
+    @Builder
     public static class Book {
         private String isbn;
         private String username;
@@ -31,16 +35,6 @@ public class BookStoreModel {
         private String publisher;
         private int pages;
     }
-
-    @Data
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class AuthorizationData {
-        private String userName;
-        private String password;
-    }
-
 }
 
 

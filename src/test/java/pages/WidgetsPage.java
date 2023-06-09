@@ -19,9 +19,13 @@ public class WidgetsPage {
     private final String ACCORDIAN_ATTRIBUTE_VALUE = "collapse";
     private final String SLIDER_ATTRIBUTE = "value";
     private final String SLIDER_VALUE_AFTER_MOVING = "56";
+    private final String RESET_BUTTON_TEXT="Reset";
 
     @FindBy(xpath = "//span[text()='Accordian']")
     private WebElement spanAccordian;
+
+    @FindBy(xpath="//span[text()='Progress Bar']")
+    private WebElement spanProgressBar;
 
     @FindBy(xpath = "//span[text()='Slider']")
     private WebElement slider;
@@ -40,6 +44,12 @@ public class WidgetsPage {
 
     @FindBy(id = "sliderValue")
     private WebElement sliderValueInput;
+
+    @FindBy(css = "button[id=startStopButton]")
+    private WebElement startButton;
+
+    @FindBy(id="resetButton")
+    private WebElement resetButton;
 
 
     public WidgetsPage(WebDriver driver) {
@@ -71,5 +81,24 @@ public class WidgetsPage {
         new ActionsHelper(driver).DragAndDropElement(dragSliderToX, 30, 0);
         Assert.assertEquals(UIHelper.getAttributeValue(sliderValueInput, SLIDER_ATTRIBUTE), SLIDER_VALUE_AFTER_MOVING);
         return this;
+    }
+
+    @Step("Клик по кнопке progress Bar")
+    public WidgetsPage clickToProgressBar() {
+        spanProgressBar.click();
+        return this;
+    }
+
+    @Step("Клик по кнопке Start в разделе progressBar")
+    public WidgetsPage clickToButtonStart(){
+        startButton.click();
+        return this;
+    }
+
+    @Step("Проверка что аттрибут изменил значение текст")
+    public  WidgetsPage checkThatElementChangedText(){
+       resetButton=UIHelper.waitForElementClickable(resetButton,20);
+       Assert.assertEquals(resetButton.getText(),RESET_BUTTON_TEXT);
+       return this;
     }
 }

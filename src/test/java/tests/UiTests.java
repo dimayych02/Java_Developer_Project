@@ -15,13 +15,11 @@ import org.testng.annotations.Test;
 @Listeners(AttachOnFailedTest.class)
 public class UiTests extends BaseUITests {
 
+    private BookStoreModel apiAuth;
+    private BookStoreModel apiRegister;
     private String userName;
     private String password;
-    private final String NEW_USER_ENDPOINT = ApiData.Endpoints.NEW_USER_ENDPOINT;
-    private final String AUTHORIZATION_ENDPOINT = ApiData.Endpoints.AUTHORIZATION_ENDPOINT;
-    private final Object USER_DATA_AUTH = new BookStoreModel.AuthorizationData(ApiData.UserData.USER_NAME, ApiData.UserData.USER_PASSWORD);
 
-    private BookStoreModel.AuthorizationData userDataRegister = new BookStoreModel.AuthorizationData(ApiData.UserData.newUser, ApiData.UserData.newPassword);
 
 
     @Test
@@ -134,9 +132,14 @@ public class UiTests extends BaseUITests {
     @Test
     public void uiAuthorizationWithApiRegister() { //создание пользователя на бэке и авторизация на UI
         //Создание нового польхователя на бэке
-        Assert.assertEquals(RequestToApi.methodPOST(userDataRegister, NEW_USER_ENDPOINT).statusCode(), 201, "Ошибка,пользователь не был зарегистрирован на бэке!");
-        userName = userDataRegister.getUserName();
-        password = userDataRegister.getPassword();
+        apiRegister = BookStoreModel.builder()
+                .userName(ApiData.UserData.USER_NAME)
+                .password(ApiData.UserData.newPassword)
+                .build();
+
+        Assert.assertEquals(RequestToApi.methodPOST(apiRegister, ApiData.Endpoints.NEW_USER_ENDPOINT).statusCode(), 201, "Ошибка,пользователь не был зарегистрирован на бэке!");
+        userName = apiRegister.getUserName();
+        password = apiRegister.getPassword();
         mainPage.clickToBookStore();
         bookStorePage.spanLoginClick();
         bookStorePage.fillLogin(userName);
@@ -146,6 +149,12 @@ public class UiTests extends BaseUITests {
 
     @Test(retryAnalyzer = TestNGRetry.class)
     public void uiRegistrationWithApiAuth() { //создание пользователя на UI и авторизация на бэке
+        //Авторизация на бэке
+        apiAuth=BookStoreModel.builder()
+                .userName(ApiData.UserData.USER_NAME)
+                .password(ApiData.UserData.USER_PASSWORD)
+                .build();
+
         userName = Generator.generateString();
         password = Generator.generatePassword();
         mainPage.clickToBookStore();
@@ -157,7 +166,7 @@ public class UiTests extends BaseUITests {
         bookStorePage.fillPassword(password);
         bookStorePage.captchaClick();
         bookStorePage.registerClick();
-        Assert.assertEquals(RequestToApi.methodPOST(USER_DATA_AUTH, AUTHORIZATION_ENDPOINT), 201, "Ошибка статус-код не 201!");
+        Assert.assertEquals(RequestToApi.methodPOST(apiAuth, ApiData.Endpoints.AUTHORIZATION_ENDPOINT), 201, "Ошибка статус-код не 201!");
     }
 
     @Test
@@ -195,6 +204,14 @@ public class UiTests extends BaseUITests {
     public void moveSlider() {
         mainPage.clickToWidgets();
         widgetsPage.clickToSlider();
+    }
+
+    @Test
+    public void progressBar(){
+        mainPage.clickToWidgets();
+        widgetsPage.clickToProgressBar();
+        widgetsPage.clickToButtonStart();
+        widgetsPage.checkThatElementChangedText();
     }
 
 }

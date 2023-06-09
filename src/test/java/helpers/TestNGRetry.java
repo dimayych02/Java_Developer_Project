@@ -9,7 +9,6 @@ public class TestNGRetry  implements IRetryAnalyzer   {
     private int max = 2;
 
 
-
     //перезапуск тестов,если они упали
     @Override
     public boolean retry(ITestResult result) {

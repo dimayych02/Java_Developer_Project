@@ -41,6 +41,13 @@ public class UIHelper extends BaseUITests {
         return findStrategy;
     }
 
+    @Step("Явное ожидание на видимость элемента")
+    public static WebElement waitForElementClickable(WebElement findStrategy, long timeoutInSeconds) {
+        getWaiter(timeoutInSeconds)
+                .until(ExpectedConditions.elementToBeClickable(findStrategy));
+        return findStrategy;
+    }
+
     @Step("Явное ожидание на видимость элементов")
     public static List<WebElement> waitForElementsVisible(List<WebElement> findStrategy, long timeoutInSeconds) {
         getWaiter(timeoutInSeconds)
@@ -54,11 +61,6 @@ public class UIHelper extends BaseUITests {
                 .until(ExpectedConditions.alertIsPresent());
     }
 
-    @Step("Явное ожидание на содержание в аттрибуте веб-та нужного нам значения")
-    public static void waitForAttributeElementContains(WebElement findStrategy, String attribute, String attributeValue, long timeoutInSeconds) {
-        getWaiter(timeoutInSeconds)
-                .until(ExpectedConditions.not(ExpectedConditions.attributeContains(findStrategy, attribute, attributeValue)));
-    }
 
     @Step("Переключение на frame")
     public static WebDriver frameElement(WebElement frame) {
