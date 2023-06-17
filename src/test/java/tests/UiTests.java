@@ -21,7 +21,6 @@ public class UiTests extends BaseUITests {
     private String password;
 
 
-
     @Test
     public void textBoxForm() {
         mainPage.clickToElements();
@@ -133,7 +132,7 @@ public class UiTests extends BaseUITests {
     public void uiAuthorizationWithApiRegister() { //создание пользователя на бэке и авторизация на UI
         //Создание нового польхователя на бэке
         apiRegister = BookStoreModel.builder()
-                .userName(ApiData.UserData.USER_NAME)
+                .userName(ApiData.UserData.newUser)
                 .password(ApiData.UserData.newPassword)
                 .build();
 

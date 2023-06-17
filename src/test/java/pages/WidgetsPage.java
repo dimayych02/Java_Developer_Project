@@ -78,7 +78,7 @@ public class WidgetsPage {
     @Step("Перемещение элемента  slider по оси OX")
     public WidgetsPage clickToSlider() {
         slider.click();
-        new ActionsHelper(driver).DragAndDropElement(dragSliderToX, 30, 0);
+        new ActionsHelper(driver).dragAndDropElement(dragSliderToX, 30, 0);
         Assert.assertEquals(UIHelper.getAttributeValue(sliderValueInput, SLIDER_ATTRIBUTE), SLIDER_VALUE_AFTER_MOVING);
         return this;
     }

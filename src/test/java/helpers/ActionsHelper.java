@@ -14,7 +14,7 @@ public class ActionsHelper {
     }
 
     @Step("Action-перемещение элемента по осям OX,OY")
-    public ActionsHelper DragAndDropElement(WebElement element, int x, int y) {
+    public ActionsHelper dragAndDropElement(WebElement element, int x, int y) {
         new Actions(driver)
                 .dragAndDropBy(element, x, y)
                 .build()
