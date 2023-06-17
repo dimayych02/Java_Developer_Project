@@ -13,6 +13,7 @@ import java.util.Set;
 
 
 public class UIHelper extends BaseUITests {
+    
     @Step("Прокрутка до элемента на странице")
     public static void scrollToElement(WebElement element) {
         ((JavascriptExecutor) driver)
